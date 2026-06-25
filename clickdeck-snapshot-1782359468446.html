@@ -1,0 +1,2088 @@
+<!DOCTYPE html>
+<!-- Exported by ClickDeck Snapshot. Modifications applied to DOM are preserved. Original source files are not rewritten. -->
+<html lang="zh-CN"><head><base href="https://7b0140508e054fb79717dc7f983b5779.app.codebuddy.work/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIVA 高管IP账号矩阵搭建策略</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --red: #C4001C;
+  --red-light: #FCE8EB;
+  --red-dark: #8A0013;
+  --red-soft: #FFCCD5;
+  --red-deep: #5C000E;
+  --black: #111111;
+  --gray: #555555;
+  --gray-light: #F8F8F8;
+  --gray-mid: #E8E8E8;
+  --gray-dark: #D0D0D0;
+  --white: #FFFFFF;
+  --table-bg: #FFFFFF;
+  --table-alt: #F5F5F5;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  color: var(--black);
+  background: var(--white);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ===== 顶部固定导航 ===== */
+.top-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid rgba(196,0,28,0.08);
+  padding: 0 32px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.top-nav .nav-brand {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--red);
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+.top-nav .nav-links {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-right: 8px;
+}
+.top-nav .nav-links::-webkit-scrollbar { display: none; }
+.top-nav .nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  text-decoration: none;
+  color: var(--gray);
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.top-nav .nav-links a:hover {
+  background: var(--red-light);
+  color: var(--red);
+}
+.top-nav .nav-links a.active {
+  background: var(--red);
+  color: var(--white);
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(196,0,28,0.25);
+}
+.top-nav .nav-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(196,0,28,0.1);
+  color: var(--red);
+  font-size: 12px;
+  font-weight: 700;
+}
+.top-nav .nav-links a.active .nav-num {
+  background: rgba(255,255,255,0.2);
+  color: var(--white);
+}
+
+/* ===== 分屏 ===== */
+.section {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px 48px 80px;
+  position: relative;
+  overflow: hidden;
+}
+.section-compact {
+  min-height: auto;
+  padding: 80px 48px;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* 编号 */
+.section-num {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--red);
+  letter-spacing: 3px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+/* 标题 */
+h2.section-title {
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+}
+h3.block-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--black);
+}
+h4.sub-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--red);
+}
+
+/* 文本 */
+.lead {
+  font-size: 20px;
+  color: var(--gray);
+  line-height: 1.7;
+  margin-bottom: 40px;
+  max-width: 720px;
+}
+.p-short {
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--gray);
+  margin-bottom: 0;
+}
+
+/* ===== 卡片 ===== */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+.card-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.card-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.card {
+  background: var(--white);
+  border: 1px solid var(--gray-mid);
+  border-radius: 16px;
+  padding: 36px;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--red);
+  transform: scaleX(0);
+  transition: transform 0.35s ease;
+  border-radius: 16px 16px 0 0;
+}
+.card:hover::before {
+  transform: scaleX(1);
+}
+.card:hover {
+  border-color: var(--red-soft);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(196,0,28,0.1);
+}
+.card-red {
+  background: var(--red);
+  color: var(--white);
+  border: none;
+}
+.card-red::before { display: none; }
+.card-red:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(196,0,28,0.3);
+}
+.card-red h3, .card-red h4, .card-red p { color: var(--white); }
+.card-red .card-icon { color: var(--white); }
+.card-light {
+  background: var(--red-light);
+  border: none;
+}
+.card-light::before { display: none; }
+.card-icon {
+  font-size: 36px;
+  margin-bottom: 18px;
+  color: var(--red);
+}
+.card-num {
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--red);
+  opacity: 0.15;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.card-red .card-num { color: var(--white); opacity: 0.25; }
+
+/* 编号角标 */
+.corner-num {
+  position: absolute;
+  top: 20px; right: 24px;
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--red);
+  opacity: 0.08;
+  line-height: 1;
+}
+.card-red .corner-num { color: var(--white); opacity: 0.15; }
+
+/* ===== 列表 ===== */
+.ul-clean {
+  list-style: none;
+  padding: 0;
+}
+.ul-clean li {
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 17px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  line-height: 1.6;
+}
+.ul-clean li:last-child { border-bottom: none; }
+.ul-clean li::before {
+  content: '▸';
+  color: var(--red);
+  font-weight: 700;
+  flex-shrink: 0;
+  font-size: 17px;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+  overflow-x: auto;
+  margin: 28px 0;
+  border-radius: 14px;
+  border: 1px solid var(--gray-mid);
+  background: var(--table-bg);
+}
+.table-style {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 16px;
+}
+.table-style th {
+  background: var(--gray-dark);
+  color: var(--black);
+  padding: 18px 20px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--red);
+  white-space: nowrap;
+}
+.table-style th:first-child { border-radius: 14px 0 0 0; }
+.table-style th:last-child { border-radius: 0 14px 0 0; }
+.table-style td {
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--gray-mid);
+  vertical-align: top;
+  line-height: 1.7;
+  color: var(--black);
+}
+.table-style td strong {
+  color: var(--black);
+  font-weight: 700;
+}
+.table-style tr:last-child td { border-bottom: none; }
+.table-style tr:last-child td:first-child { border-radius: 0 0 0 14px; }
+.table-style tr:last-child td:last-child { border-radius: 0 0 14px 0; }
+.table-style tr:nth-child(even) { background: var(--table-alt); }
+.table-style tr:hover { background: var(--red-light) !important; transition: background 0.2s; }
+
+/* ===== 引用块 ===== */
+.quote-block {
+  border-left: 4px solid var(--red);
+  padding: 24px 32px;
+  background: var(--red-light);
+  margin: 32px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--red-dark);
+  border-radius: 0 14px 14px 0;
+}
+
+/* ===== 数据高亮 ===== */
+.stat-highlight {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+}
+.stat-big {
+  font-size: 56px;
+  font-weight: 800;
+  color: var(--red);
+  line-height: 1;
+}
+.stat-unit {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--red);
+}
+.stat-label-inline {
+  font-size: 16px;
+  color: var(--gray);
+  margin-left: 4px;
+}
+
+/* ===== 时间线 ===== */
+.timeline {
+  position: relative;
+  padding-left: 30px;
+  border-left: 2px solid var(--red-soft);
+  margin: 24px 0;
+}
+.timeline-item {
+  position: relative;
+  padding-bottom: 32px;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -36px;
+  top: 2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--red);
+  border: 3px solid var(--white);
+  box-shadow: 0 0 0 2px var(--red-soft);
+}
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.timeline-desc {
+  font-size: 16px;
+  color: var(--gray);
+  line-height: 1.7;
+}
+
+/* ===== 标签 ===== */
+.tag {
+  display: inline-block;
+  padding: 6px 16px;
+  background: var(--red-light);
+  color: var(--red);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 100px;
+  margin: 3px 4px 3px 0;
+  transition: all 0.2s ease;
+}
+.tag:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(196,0,28,0.15);
+}
+.tag-white {
+  background: var(--white);
+  color: var(--red);
+}
+.tag-outline {
+  background: transparent;
+  border: 1.5px solid var(--red);
+}
+
+/* ===== 分栏 ===== */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+.three-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* ===== 背景 ===== */
+.bg-red { background: var(--red); color: var(--white); }
+.bg-red h1, .bg-red h2, .bg-red h3, .bg-red p { color: var(--white); }
+.bg-red .section-num { color: rgba(255,255,255,0.6); }
+.bg-red .card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); }
+.bg-red .card h3, .bg-red .card p { color: var(--white); }
+.bg-red .card-icon { color: var(--white); }
+.bg-red .card-num { color: var(--white); opacity: 0.2; }
+.bg-red .quote-block { background: rgba(255,255,255,0.12); border-left-color: var(--white); color: var(--white); }
+.bg-light { background: var(--gray-light); }
+.bg-red-light { background: var(--red-light); }
+.bg-gradient {
+  background: linear-gradient(135deg, var(--white) 0%, var(--red-light) 50%, var(--white) 100%);
+}
+
+/* ===== 封面 ===== */
+.cover {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(160deg, var(--white) 0%, var(--red-light) 40%, var(--white) 100%);
+  position: relative;
+}
+.cover .badge {
+  display: inline-block;
+  padding: 10px 28px;
+  background: var(--red);
+  color: var(--white);
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 100px;
+  margin-bottom: 32px;
+  letter-spacing: 2px;
+  box-shadow: 0 4px 16px rgba(196,0,28,0.25);
+}
+.cover h1 {
+  font-size: 76px;
+  font-weight: 900;
+  line-height: 1.08;
+  margin-bottom: 24px;
+  letter-spacing: -2px;
+}
+.cover .subtitle {
+  font-size: 26px;
+  color: var(--gray);
+  margin-bottom: 44px;
+  font-weight: 400;
+}
+.cover .meta {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  font-size: 15px;
+  color: var(--gray);
+  flex-wrap: wrap;
+}
+.cover .meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 100px;
+  border: 1px solid var(--gray-mid);
+}
+
+/* 封面装饰 */
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -15%;
+  right: -8%;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--red-soft) 0%, transparent 70%);
+  opacity: 0.5;
+  pointer-events: none;
+}
+.cover::after {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  left: -10%;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--red-soft) 0%, transparent 70%);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* ===== 总结流程 ===== */
+.summary-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 36px 0;
+}
+.summary-node {
+  padding: 16px 24px;
+  background: var(--white);
+  border: 2px solid var(--red);
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(196,0,28,0.06);
+  transition: all 0.3s ease;
+}
+.summary-node:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(196,0,28,0.12);
+}
+.summary-arrow {
+  color: var(--red);
+  font-size: 24px;
+  font-weight: 800;
+}
+
+/* ===== 阶段卡片 ===== */
+.phase-card {
+  padding: 32px;
+  border-radius: 16px;
+  background: var(--white);
+  border: 2px solid var(--gray-mid);
+  position: relative;
+  transition: all 0.3s ease;
+}
+.phase-card:hover {
+  border-color: var(--red-soft);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(196,0,28,0.08);
+}
+.phase-card.active {
+  border-color: var(--red);
+  box-shadow: 0 8px 32px rgba(196,0,28,0.12);
+}
+.phase-tag {
+  position: absolute;
+  top: -12px;
+  left: 22px;
+  padding: 5px 16px;
+  background: var(--red);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 100px;
+  letter-spacing: 0.5px;
+}
+
+/* ===== 角色卡片 ===== */
+.role-card {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  padding: 24px;
+  border-radius: 14px;
+  background: var(--white);
+  border: 1px solid var(--gray-mid);
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+}
+.role-card:hover {
+  border-color: var(--red-soft);
+  box-shadow: 0 8px 24px rgba(196,0,28,0.06);
+}
+.role-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--red-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+  color: var(--red);
+  font-weight: 700;
+}
+.role-body h4 { font-size: 18px; margin-bottom: 8px; }
+.role-body p { font-size: 16px; color: var(--gray); line-height: 1.7; }
+
+/* ===== 分隔线 ===== */
+.section-divider {
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  opacity: 0.3;
+  margin: 0;
+}
+
+/* ===== 动画 ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+.count-up {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ===== 窄屏适配 ===== */
+@media (max-width: 768px) {
+  .top-nav { padding: 0 12px; height: 52px; }
+  .top-nav .nav-brand { font-size: 14px; }
+  .top-nav .nav-links a { padding: 5px 10px; font-size: 12px; }
+  .section { padding: 80px 20px 48px; }
+  .cover h1 { font-size: 42px; }
+  h2.section-title { font-size: 30px; }
+  h3.block-title { font-size: 22px; }
+  .card-grid-4, .card-grid-3, .two-col, .three-col { grid-template-columns: 1fr; }
+  .summary-flow { flex-direction: column; gap: 8px; }
+  .summary-arrow { transform: rotate(90deg); }
+  .cover .meta { gap: 8px; }
+  .table-style { font-size: 14px; }
+  .table-style th, .table-style td { padding: 12px 14px; }
+  .p-short { font-size: 15px; }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .card-grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .top-nav { padding: 0 20px; }
+  .table-style { font-size: 15px; }
+}
+
+/* 特殊：竞品案例的分级标签 */
+.level-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-right: 8px;
+}
+.level-tag.core { background: var(--red); color: var(--white); }
+.level-tag.important { background: var(--red-light); color: var(--red); }
+.level-tag.detail { background: var(--gray-light); color: var(--gray); }
+
+/* 迷你标签组 */
+.mini-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+.mini-tag {
+  padding: 4px 12px;
+  background: var(--red-light);
+  color: var(--red);
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 100px;
+}
+
+/* 大号标题卡片 */
+.hero-card {
+  padding: 48px;
+  border-radius: 18px;
+  background: var(--white);
+  border: 2px solid var(--red);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero-card::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle, var(--red-soft) 0%, transparent 60%);
+  opacity: 0.3;
+  pointer-events: none;
+}
+.hero-card h3 {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--red);
+  margin-bottom: 14px;
+  position: relative;
+}
+.hero-card p {
+  font-size: 20px;
+  color: var(--gray);
+  position: relative;
+}
+
+/* 四列等宽卡片 */
+.equal-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.equal-4 .card { padding: 28px; }
+.equal-4 .card h3 { font-size: 18px; }
+.equal-4 .card p { font-size: 15px; }
+
+/* 底部强调条 */
+.bottom-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 32px;
+}
+.bottom-bar .card {
+  padding: 28px;
+  text-align: center;
+}
+.bottom-bar .card-icon { font-size: 28px; margin-bottom: 12px; }
+.bottom-bar .card h4 { font-size: 16px; margin-bottom: 8px; }
+.bottom-bar .card p { font-size: 15px; }
+
+/* 进度指示器 */
+.progress-dots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin: 16px 0;
+}
+.progress-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gray-mid);
+}
+.progress-dot.active {
+  background: var(--red);
+  box-shadow: 0 0 0 3px var(--red-light);
+}
+
+/* 窄表格 */
+.table-compact td, .table-compact th {
+  padding: 12px 14px;
+  font-size: 15px;
+}
+
+/* 红色边框卡片 */
+.card-red-border {
+  border: 2px solid var(--red);
+  background: var(--red-light);
+}
+
+/* 失败案例红色卡片 */
+.fail-card {
+  border: 2px solid var(--red);
+  background: var(--red-light);
+  padding: 32px;
+  border-radius: 14px;
+  margin-top: 16px;
+}
+.fail-card h4 { color: var(--red); }
+.fail-card p { color: var(--black); font-size: 16px; line-height: 1.8; }
+
+/* 编号卡片 */
+.num-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.num-badge {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--red);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* 表格内小标签 */
+.td-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  background: var(--red-light);
+  color: var(--red);
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 6px;
+  margin: 2px 4px 2px 0;
+  white-space: nowrap;
+}
+</style>
+<script src="https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js"></script>
+<script>
+(function(){
+  try{
+    var beacon=new BeaconAction({
+      appkey:'0WEB06U85YBSLJNL',
+      versionCode:'1.0.0',
+      channelID:'share',
+      delay:1000,
+      sessionDuration:30*60*1000,
+      isOversea:false,
+      needReportRqdEvent:false
+    });
+    beacon.onDirectUserAction('preview_page_view',{
+      'url':location.href,
+      'referrer':document.referrer,
+      'title':document.title,
+      'sandbox_id':'e3d2b249d382415aaf0258838b5e6462'
+    });
+  }catch(e){}
+})();
+</script></head>
+<body>
+
+<!-- ===== 顶部固定导航 ===== -->
+<nav class="top-nav" id="topNav" style="transform: translateY(0px);">
+  <div class="nav-brand">AIVA 高管IP策略</div>
+  <div class="nav-links">
+    <a href="#cover" class="nav-link"><span class="nav-num">0</span>封面</a>
+    <a href="#summary" class="nav-link"><span class="nav-num">1</span>摘要</a>
+    <a href="#trend" class="nav-link"><span class="nav-num">2</span>趋势</a>
+    <a href="#value" class="nav-link"><span class="nav-num">3</span>价值风险</a>
+    <a href="#position" class="nav-link"><span class="nav-num">4</span>定位</a>
+    <a href="#competitor" class="nav-link"><span class="nav-num">5</span>竞品</a>
+    <a href="#why" class="nav-link"><span class="nav-num">6</span>为什么</a>
+    <a href="#who" class="nav-link"><span class="nav-num">7</span>是谁</a>
+    <a href="#mission" class="nav-link"><span class="nav-num">8</span>使命</a>
+    <a href="#narrative" class="nav-link"><span class="nav-num">9</span>叙事</a>
+    <a href="#platform" class="nav-link active"><span class="nav-num">10</span>平台</a>
+    <a href="#content" class="nav-link"><span class="nav-num">11</span>内容</a>
+    <a href="#topic" class="nav-link"><span class="nav-num">12</span>选题</a>
+    <a href="#operation" class="nav-link"><span class="nav-num">13</span>运营</a>
+    <a href="#final" class="nav-link"><span class="nav-num">14</span>总结</a>
+  </div>
+</nav>
+
+<!-- ===== 封面 ===== -->
+<section class="section cover" id="cover">
+  <div class="container">
+    <div class="badge reveal active">AIVA · 高管IP策略</div>
+    <h1 class="reveal reveal-delay-1 active">高管IP账号<br>矩阵搭建策略</h1>
+    <p class="subtitle reveal reveal-delay-2 active">呈现对象：李博总裁 &nbsp;|&nbsp; 赛豆品牌市场部</p>
+    <div class="meta reveal reveal-delay-3 active">
+      <div class="meta-item">📅 2026年6月24日</div>
+      <div class="meta-item">🔒 内部机密</div>
+      <div class="meta-item">📋 V2.0</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== 执行摘要 ===== -->
+<section class="section" id="summary">
+  <div class="container">
+    <div class="section-num reveal active">EXECUTIVE SUMMARY</div>
+    <h2 class="section-title reveal reveal-delay-1 active">四项核心结论</h2>
+    <p class="lead reveal reveal-delay-2 active">基于行业趋势、价值风险、传播定位及竞品案例的系统分析</p>
+    
+    <div class="equal-4">
+      <div class="card card-red reveal reveal-delay-1 active">
+        <div class="corner-num">01</div>
+        <h3>高管IP = 品牌建设基础设施</h3>
+        <p class="p-short">67%的30万以上购车用户关注高管言论。新势力全员IP化，传统品牌跟进。这不是营销创新，是竞争标配。</p>
+      </div>
+      <div class="card reveal reveal-delay-2 active">
+        <div class="corner-num">02</div>
+        <h3>新品牌的战略杠杆</h3>
+        <p class="p-short">成熟品牌做IP是锦上添花，新品牌做IP是从零建立信任的最短路径。AIVA没有历史积淀，高管IP用最低成本撬动用户心智。</p>
+      </div>
+      <div class="card reveal reveal-delay-3 active">
+        <div class="corner-num">03</div>
+        <h3>风险完全可控</h3>
+        <p class="p-short">守住「真实、边界、可持续」三原则。失败案例的反噬源于：挑衅引流、贬损用户、拉踩同业。</p>
+      </div>
+      <div class="card card-light reveal reveal-delay-4 active">
+        <div class="corner-num">04</div>
+        <h3>李博是「最优解」</h3>
+        <p class="p-short">华为+问界背景、AI产品深度理解、品牌总裁兼首席产品经理。品牌发布后3-6个月是建立IP认知的黄金窗口。</p>
+      </div>
+    </div>
+    
+    <div class="quote-block reveal active" style="margin-top:40px;">
+      核心启示：高管IP对AIVA是必选项，风险可控，李博本人是最佳人选。
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== 01 趋势分析 ===== -->
+<section class="section bg-light" id="trend">
+  <div class="container">
+    <div class="section-num reveal active">01 ｜ 趋势分析</div>
+    <h2 class="section-title reveal reveal-delay-1 active">高管IP已成为品牌竞争标配</h2>
+    <p class="lead reveal reveal-delay-2 active">用户决策路径、信息来源、行业共识正在发生根本性迁移</p>
+    
+    <div class="equal-4" style="margin-bottom:36px;">
+      <div class="card reveal active" style="text-align:center; border-top:3px solid var(--red);">
+        <div class="card-icon">🔄</div>
+        <span class="tag" style="margin-bottom:14px; display:inline-block;">趋势 1</span>
+        <h3 style="font-size:18px;">决策路径改变</h3>
+        <div style="margin:16px 0;">
+          <span class="stat-big">67</span><span class="stat-unit">%</span>
+        </div>
+        <p class="p-short" style="font-size:15px;">30万以上购车用户关注高管公开言论，高于传统广告和4S店推荐</p>
+      </div>
+      <div class="card reveal reveal-delay-1 active" style="text-align:center; border-top:3px solid var(--red);">
+        <div class="card-icon">📱</div>
+        <span class="tag" style="margin-bottom:14px; display:inline-block;">趋势 2</span>
+        <h3 style="font-size:18px;">信息来源迁移</h3>
+        <div style="margin:16px 0;">
+          <span class="stat-big">52</span><span class="stat-unit">%</span>
+        </div>
+        <p class="p-short" style="font-size:15px;">社交平台成为潜客获取车型信息的第一渠道，高管「原话」被KOL二次传播</p>
+      </div>
+      <div class="card reveal reveal-delay-2 active" style="text-align:center; border-top:3px solid var(--red);">
+        <div class="card-icon">🚗</div>
+        <span class="tag" style="margin-bottom:14px; display:inline-block;">趋势 3</span>
+        <h3 style="font-size:18px;">行业共识形成</h3>
+        <p class="p-short" style="font-size:15px; margin-top:16px;">新势力全员高管IP化（蔚来李斌、理想李想、小鹏何小鹏、小米雷军），传统豪华跟进（宝马、奔驰中国区高管陆续开号）</p>
+      </div>
+      <div class="card reveal reveal-delay-3 active" style="text-align:center; border-top:3px solid var(--red);">
+        <div class="card-icon">⚡</div>
+        <span class="tag" style="margin-bottom:14px; display:inline-block;">趋势 4</span>
+        <h3 style="font-size:18px;">业态全面演变</h3>
+        <p class="p-short" style="font-size:15px; margin-top:16px;">自雷军以互联网营销思路「洗礼」汽车圈，高管IP已从新势力蔓延到自主、合资乃至央企</p>
+      </div>
+    </div>
+    
+    <div class="quote-block reveal active" style="margin-top:32px;">
+      高管IP不是营销加分项，而是品牌基本盘的竞争力标配。
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== 02 价值与风险 ===== -->
+<section class="section" id="value">
+  <div class="container">
+    <div class="section-num reveal active">02 ｜ 价值与风险</div>
+    <h2 class="section-title reveal reveal-delay-1 active">五大价值 vs 四大风险</h2>
+    <p class="lead reveal reveal-delay-2 active">价值驱动落地，风险可控管理</p>
+    
+    <!-- 上：五大核心价值表格 -->
+    <div class="reveal active" style="margin-bottom:32px;">
+      <h3 class="block-title">一、五大核心价值</h3>
+      <div class="table-wrap">
+        <table class="table-style">
+          <tbody><tr>
+            <th style="width:22%">维度</th>
+            <th style="width:40%">核心价值</th>
+            <th style="width:38%">典型案例</th>
+          </tr>
+          <tr>
+            <td><strong>品牌</strong><br><span style="font-size:14px; color:var(--gray);">品牌嘴替，从"机构"到"人"的信任跃迁</span></td>
+            <td>品牌人格化，建立信任最快路径；差异化壁垒；溢价支撑</td>
+            <td>雷军：72%购车者因信任雷军下单</td>
+          </tr>
+          <tr>
+            <td><strong>传播</strong><br><span style="font-size:14px; color:var(--gray);">流量加持，从"付费投放"到"免费内容资产"</span></td>
+            <td>内容零成本、高可信；媒体引用优先级最高；热搜破圈</td>
+            <td>魏建军"我不说假话"零推广自发传播</td>
+          </tr>
+          <tr>
+            <td><strong>营销</strong><br><span style="font-size:14px; color:var(--gray);">种草促销，从"漏斗末端"到"决策前端"</span></td>
+            <td>决策链前置介入；高质量线索获取；价格战免疫力</td>
+            <td>李斌凌晨回评直接解决问题</td>
+          </tr>
+          <tr>
+            <td><strong>用户</strong><br><span style="font-size:14px; color:var(--gray);">养成共创，从"交易关系"到"共生关系"</span></td>
+            <td>从消费者变参与者；反馈直通车；危机缓冲垫</td>
+            <td>蔚来社群高黏性源于李斌人格化</td>
+          </tr>
+          <tr>
+            <td><strong>组织</strong><br><span style="font-size:14px; color:var(--gray);">影响变革，从"内部决策"到"外部共识"</span></td>
+            <td>倒逼产品决策质量；人才吸引力；投资人信心</td>
+            <td>理想IPO前李想IP对投资人影响超PPT</td>
+          </tr>
+        </tbody></table>
+      </div>
+    </div>
+    
+    <!-- 中：四大核心风险表格 -->
+    <div class="reveal active" style="margin-bottom:32px;">
+      <h3 class="block-title">二、四大核心风险</h3>
+      <div class="table-wrap">
+        <table class="table-style">
+          <tbody><tr>
+            <th style="width:22%">风险</th>
+            <th style="width:40%">表现</th>
+            <th style="width:38%">案例</th>
+          </tr>
+          <tr>
+            <td><strong>过度绑定会反噬</strong></td>
+            <td>个人负面直接传导品牌</td>
+            <td>董明珠争议直接影响格力形象</td>
+          </tr>
+          <tr>
+            <td><strong>言论越界生负面</strong></td>
+            <td>泄密/评价友商/敏感话题</td>
+            <td>某高管直播提前泄密打乱上市节奏</td>
+          </tr>
+          <tr>
+            <td><strong>流量泡沫无助力</strong></td>
+            <td>数据好看但无效</td>
+            <td>周鸿祎带火哪吒却未转化销量</td>
+          </tr>
+          <tr>
+            <td><strong>内容枯竭成摆设</strong></td>
+            <td>更新降频沦为僵尸号</td>
+            <td>2026年超半数高管账号月更以下</td>
+          </tr>
+        </tbody></table>
+      </div>
+    </div>
+    
+    <!-- 下：风险平衡策略 -->
+    <h3 class="block-title reveal active" style="margin-top:36px; margin-bottom:20px;">三、价值与风险平衡策略</h3>
+    <div class="bottom-bar">
+      <div class="card card-light reveal reveal-delay-1 active">
+        <div class="card-icon">🎯</div>
+        <h4>真实不表演</h4>
+        <p class="p-short">人设必须与本人一致，避免「表演真诚」被戳穿。</p>
+      </div>
+      <div class="card card-light reveal reveal-delay-2 active">
+        <div class="card-icon">🧱</div>
+        <h4>边界清晰</h4>
+        <p class="p-short">建立可讲/慎讲/禁讲清单，行业观点需内部预审。</p>
+      </div>
+      <div class="card card-light reveal reveal-delay-3 active">
+        <div class="card-icon">⚖️</div>
+        <h4>双轨并行</h4>
+        <p class="p-short">个人IP与品牌IP并行，避免过度绑定。</p>
+      </div>
+      <div class="card card-light reveal reveal-delay-4 active">
+        <div class="card-icon">🤖</div>
+        <h4>数字人定位</h4>
+        <p class="p-short">不用于危机/情感/深度场景，明确工具属性。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== 03 传播定位 ===== -->
+<section class="section bg-light" id="position">
+  <div class="container">
+    <div class="section-num reveal active">03 ｜ 传播定位</div>
+    <h2 class="section-title reveal reveal-delay-1 active">高管IP = 品牌信任「中枢」</h2>
+    <p class="lead reveal reveal-delay-2 active">不是传播的「一个渠道」，而是整个体系的信任中枢</p>
+    
+    <div class="two-col" style="margin-bottom:32px;">
+      <div class="card reveal active" style="padding:28px;">
+        <div class="card-icon">💡</div>
+        <h3 style="font-size:20px;">核心定位</h3>
+        <p class="p-short" style="margin-top:14px;">用户可以不信任广告，但可能信任「雷军这个人」（72%信任购车转化）。高管IP先通过「人」建立基础信任。</p>
+      </div>
+      <div class="card reveal reveal-delay-1 active" style="padding:28px;">
+        <div class="card-icon">🎯</div>
+        <h3 style="font-size:20px;">传播目标</h3>
+        <p class="p-short" style="margin-top:14px;">品牌人格化、信任资产积累、差异化壁垒、叙事主导权、用户关系从「交易」升级为「共生」。</p>
+      </div>
+    </div>
+    
+    <h3 class="block-title reveal active">二、五大作用 × 新老品牌对比</h3>
+    <div class="table-wrap reveal reveal-delay-1 active">
+      <table class="table-style">
+        <tbody><tr>
+          <th style="width:14%">作用</th>
+          <th style="width:30%">描述</th>
+          <th style="width:28%">成熟品牌</th>
+          <th style="width:28%">新品牌</th>
+        </tr>
+        <tr>
+          <td><strong>信任前置</strong></td>
+          <td>用户接触产品前，先通过「人」建立基础信任</td>
+          <td>强化已有信任，防止老化</td>
+          <td>从零建立信任，降低认知门槛</td>
+        </tr>
+        <tr>
+          <td><strong>内容引擎</strong></td>
+          <td>高管原话是媒体、KOL二次传播的「第一手信源」</td>
+          <td>提供行业观点，维持声量</td>
+          <td>制造话题，快速建立品牌叙事</td>
+        </tr>
+        <tr>
+          <td><strong>叙事统一</strong></td>
+          <td>确保品牌在不同渠道、不同时间的声音保持一致</td>
+          <td>在多品牌矩阵中保持一致性</td>
+          <td>在认知空白期定义品牌调性</td>
+        </tr>
+        <tr>
+          <td><strong>危机缓冲</strong></td>
+          <td>负面事件时，高管IP可作为「第一解释人」化解危机</td>
+          <td>化解局部争议，维护品牌形象</td>
+          <td>应对早期危机，挽回用户信任</td>
+        </tr>
+        <tr>
+          <td><strong>组织倒逼</strong></td>
+          <td>公开表达的压力倒逼内部产品决策质量提升</td>
+          <td>优化已有流程，提升透明度</td>
+          <td>倒逼产品定义与交付质量从第一天起对齐公开承诺</td>
+        </tr>
+      </tbody></table>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== 04 竞品高管IP分析 ===== -->
+<section class="section bg-light" id="competitor">
+  <div class="container">
+    <div class="section-num reveal active">04 ｜ 竞品高管IP分析</div>
+    <h2 class="section-title reveal reveal-delay-1 active">6大竞品高管IP账号总结</h2>
+    <p class="lead reveal reveal-delay-2 active">核心判据：IP是否在为品牌充值，还是品牌在为IP擦屁股。</p>
+    
+    <!-- 6大对比表格 -->
+    <div class="table-wrap reveal active">
+      <table class="table-style">
+        <tbody><tr style="font-size: 20px;">
+          <th style="width: 12%; font-size: 15px;">高管</th>
+          <th style="width:12%">身份/话语权</th>
+          <th style="width:14%">核心人设</th>
+          <th style="width:18%">内容核心</th>
+          <th style="width:14%">主阵地</th>
+          <th style="width:12%">更新频次</th>
+          <th style="width:10%">栏目</th>
+          <th style="width:8%">风险</th>
+        </tr>
+        <tr>
+          <td><strong>雷军·小米</strong></td>
+          <td>创始人·绝对</td>
+          <td>爽文总裁</td>
+          <td>真实造车+极简</td>
+          <td>抖音·微博·视频号</td>
+          <td>高频日更/多平台</td>
+          <td>有</td>
+          <td>过度强绑定</td>
+        </tr>
+        <tr>
+          <td><strong>李斌·蔚来</strong></td>
+          <td>创始人·绝对</td>
+          <td>用户代言人</td>
+          <td>用户场景+真人秀</td>
+          <td>抖音·微博·社区</td>
+          <td>高频日更/全平台</td>
+          <td>有</td>
+          <td>调性冲突</td>
+        </tr>
+        <tr>
+          <td><strong>李想·理想</strong></td>
+          <td>创始人·绝对</td>
+          <td>懂家庭产品专家</td>
+          <td>只聊场景不聊参数</td>
+          <td>微博单平台</td>
+          <td>中频周更/单平台</td>
+          <td>无</td>
+          <td>绝对化言论</td>
+        </tr>
+        <tr>
+          <td><strong>余承东·鸿蒙</strong></td>
+          <td>经理人·强</td>
+          <td>华为技术权威</td>
+          <td>全栈技术背书</td>
+          <td>抖音·微博</td>
+          <td>中频周更/多平台</td>
+          <td>有</td>
+          <td>生态影子过强</td>
+        </tr>
+        <tr>
+          <td><strong>胡晓庆·仰望</strong></td>
+          <td>经理人·强</td>
+          <td>极致技术销售员</td>
+          <td>硬核技术+高端体验</td>
+          <td>抖音·B站</td>
+          <td>中频周更/多平台</td>
+          <td>无</td>
+          <td>技术叙事门槛高</td>
+        </tr>
+        <tr>
+          <td><strong>卢放·岚图</strong></td>
+          <td>经理人·强</td>
+          <td>务实亲民拆墙者</td>
+          <td>真实试车+用户反馈</td>
+          <td>微博·抖音·B站</td>
+          <td>高频日更/多平台</td>
+          <td>有</td>
+          <td>效率与精力分散</td>
+        </tr>
+      </tbody></table>
+    </div>
+    
+    <!-- 三大类型分析 -->
+    <div style="margin-top:48px;">
+      <h3 class="block-title reveal active">高管IP三大类型案例深度拆解</h3>
+      
+      <div class="two-col" style="margin-top:28px;">
+        <!-- 左：创始人+经理人成功案例 -->
+        <div class="reveal active">
+          <h4 class="sub-title">一、创始人成功案例</h4>
+          
+          <div class="role-card">
+            <div class="role-avatar">雷</div>
+            <div class="role-body">
+              <h4>雷军 <span style="font-size:14px; color:var(--gray); font-weight:400;">真诚勤勉的"国民产品经理"</span></h4>
+              <p><span class="level-tag core">核心</span>敢把PPT写错、造车狼狈、被骂截图拿出来晒——不藏拙 = 不装</p>
+              <p style="margin-top:8px;"><span class="level-tag important">重点</span>勤勉人设：每天打卡、亲自开门、工厂睡行军床</p>
+              <p style="margin-top:8px;"><span class="level-tag important">重点</span>清爽不油腻，平等姿态，年轻用户极具杀伤力</p>
+              <p style="margin-top:8px;"><span class="level-tag detail">细节</span>几乎不拉踩友商，用产品回应而非嘴仗</p>
+            </div>
+          </div>
+          
+          <div class="role-card">
+            <div class="role-avatar">李</div>
+            <div class="role-body">
+              <h4>李斌 <span style="font-size:14px; color:var(--gray); font-weight:400;">用户企业的"服务代言人"</span></h4>
+              <p><span class="level-tag core">核心</span>服务型人格：凌晨两三点回评用户，「我在听」的姿态</p>
+              <p style="margin-top:8px;"><span class="level-tag important">重点</span>不回避问题：直接@负责人跟进投诉，建立极高信用</p>
+              <p style="margin-top:8px;"><span class="level-tag detail">细节</span>用户场景叙事：不讲参数，只讲「妈妈带孩子怎么用」</p>
+            </div>
+          </div>
+          
+          <h4 class="sub-title" style="margin-top:28px;">二、经理人成功案例</h4>
+          
+          <div class="role-card">
+            <div class="role-avatar">胡</div>
+            <div class="role-body">
+              <h4>胡晓庆 <span style="font-size:14px; color:var(--gray); font-weight:400;">"专业尊严感"的极致销售</span></h4>
+              <p><span class="level-tag core">核心</span>不追网感：不玩梗、不蹭热点、不搞自嘲</p>
+              <p style="margin-top:8px;"><span class="level-tag important">重点</span>克制即高级：高净值客群反感「太会来事」</p>
+              <p style="margin-top:8px;"><span class="level-tag detail">细节</span>勤恳但不卑微：认真回复技术问题，从不乞求关注</p>
+            </div>
+          </div>
+          
+          <div class="role-card">
+            <div class="role-avatar">卢</div>
+            <div class="role-body">
+              <h4>卢放 <span style="font-size:14px; color:var(--gray); font-weight:400;">用"真人出镜"拆掉国企围墙</span></h4>
+              <p><span class="level-tag core">核心</span>亲自试车：真实路况测试讲解，「我在现场」的即视感</p>
+              <p style="margin-top:8px;"><span class="level-tag important">重点</span>敢回差评：不删评不拉黑，认真回复优化进度</p>
+              <p style="margin-top:8px;"><span class="level-tag detail">细节</span>高频但不敷衍：几乎日更，每条有信息量</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 右：失败案例 -->
+        <div class="reveal reveal-delay-1 active">
+          <h4 class="sub-title" style="color:var(--red);">三、创始人失败案例</h4>
+          <div class="fail-card">
+            <div style="display:flex; gap:16px; align-items:flex-start; margin-bottom:16px;">
+              <div class="role-avatar" style="background:var(--red); color:var(--white);">俞</div>
+              <div>
+                <h4 style="color:var(--red); font-size:18px; margin-bottom:4px;">追觅俞浩——流量赌徒的"三条致命红线"</h4>
+                <p style="font-size:15px; color:var(--gray);"><span style="color: black; font-size: 12pt; font-family: 宋体;">俞浩的翻车不是偶然，他踩了高管<span lang="EN-US">IP</span>绝对不能碰的三条红线</span><span style="color: rgb(0, 0, 0); font-size: medium;"></span></p>
+              </div>
+            </div>
+            <p style="font-size:16px; line-height:1.9; margin-bottom:12px;"><strong>红线一：</strong>把品牌选择等同于人格优劣。他说「不喜欢追觅的都是loser」——直接把潜在用户推到对立面。</p>
+            <p style="font-size:16px; line-height:1.9; margin-bottom:12px;"><strong>红线二：</strong>把个人账号变成企业战壕。要求2万名员工每人每天发3条短视频，把员工变成水军。既透支品牌真诚感，还触发平台「恶意营销」判定。</p>
+            <p style="font-size:16px; line-height:1.9;"><strong>红线三：</strong>无视监管信号。在「清朗」专项行动背景下，依然用挑衅式言论、拉踩友商博流量。最终被多平台禁言，品牌形象一落千丈。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== 05 为什么是李博 ===== -->
+<section class="section" id="why">
+  <div class="container">
+    <div class="section-num reveal active">05 ｜ 为什么优先完善李博IP</div>
+    <h2 class="section-title reveal reveal-delay-1 active">集中资源，单点突破</h2>
+    <p class="lead reveal reveal-delay-2 active">在「全员IP / 多高管并进 / 单点突破」三条路径中，建议优先把李博做透。</p>
+    
+    <div class="card-grid-3">
+      <div class="card reveal active" style="border-left:4px solid var(--red);">
+        <div class="num-card">
+          <span class="num-badge">1</span>
+          <div>
+            <h3 style="font-size:18px; margin-bottom:10px;">「极致热爱」典型代表</h3>
+            <p class="p-short">AIVA价值观含「极致热爱」，李博本人就喜欢AI、研究Vibe Coding、精心打造三个产品。人即品牌主张，不需要表演。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card reveal reveal-delay-1 active" style="border-left:4px solid var(--red);">
+        <div class="num-card">
+          <span class="num-badge">2</span>
+          <div>
+            <h3 style="font-size:18px; margin-bottom:10px;">三重稀缺标签</h3>
+            <p class="p-short">AI原生车企产品一号位 + Vibe Coding资深玩家 + 把「悦己」活成日常的真活人。不可复制的护城河。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card reveal reveal-delay-2 active" style="border-left:4px solid var(--red);">
+        <div class="num-card">
+          <span class="num-badge">3</span>
+          <div>
+            <h3 style="font-size:18px; margin-bottom:10px;">费效比最高</h3>
+            <p class="p-short">启动期资源有限，铺开做全员会稀释信息密度、淹没核心人物。先立住一个鲜明主角，后续KOE矩阵才有「大号带小号」引力。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card reveal reveal-delay-3 active" style="border-left:4px solid var(--red);">
+        <div class="num-card">
+          <span class="num-badge">4</span>
+          <div>
+            <h3 style="font-size:18px; margin-bottom:10px;">风险可控</h3>
+            <p class="p-short">职业经理人话语权有边界，单点运营更易做发言尺度管控与舆情前置推演，避免多头发声口径失控。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card reveal reveal-delay-4 active" style="border-left:4px solid var(--red);">
+        <div class="num-card">
+          <span class="num-badge">5</span>
+          <div>
+            <h3 style="font-size:18px; margin-bottom:10px;">最佳试验田</h3>
+            <p class="p-short">把账号当AI Agent产品来养成，需要稳定、可观测、可迭代的单一主体作为闭环起点——李博账号正是这个MVP。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== 06 李博是谁 ===== -->
+<section class="section bg-gradient" id="who">
+  <div class="container">
+    <div class="section-num reveal active">06 ｜ 李博是谁</div>
+    <h2 class="section-title reveal reveal-delay-1 active">AI汽车头号玩家</h2>
+    <p class="lead reveal reveal-delay-2 active">不仅是「首席故事官」的「第一嘴替」，更是车圈最懂AI的人和AI圈最懂车的人。</p>
+    
+    <!-- 大号展示 -->
+    <div class="hero-card reveal active" style="margin-bottom:32px; padding:40px;">
+      <h3>AI汽车头号玩家</h3>
+      <p style="font-size:18px;">人车关系变革的推动者 × 产业升级的亲历者 × AI汽车的操盘手</p>
+      <div class="mini-tags" style="justify-content:center; margin-top:16px;">
+        <span class="mini-tag">推动者</span>
+        <span class="mini-tag">亲历者</span>
+        <span class="mini-tag">操盘手</span>
+      </div>
+    </div>
+    
+    <!-- 三大身份 -->
+    <div class="card-grid-3" style="margin-bottom:32px;">
+      <div class="card reveal active" style="border-top:4px solid var(--red); text-align:center; padding:28px;">
+        <div class="card-icon">🚀</div>
+        <h3 style="font-size:20px; color:var(--red);">人车变革推动者</h3>
+        <p class="p-short" style="margin-top:14px; font-size:16px;">推动AI生活变革，推动汽车产品变革，推动人车关系变革——把控AI汽车解释权</p>
+        <div class="mini-tags" style="justify-content:center;">
+          <span class="mini-tag">AI解释权</span>
+          <span class="mini-tag">产品变革</span>
+          <span class="mini-tag">人车关系变革</span>
+        </div>
+      </div>
+      <div class="card reveal reveal-delay-1 active" style="border-top:4px solid var(--red); text-align:center; padding:28px;">
+        <div class="card-icon">🎙️</div>
+        <h3 style="font-size:20px; color:var(--red);">产业升级亲历者</h3>
+        <p class="p-short" style="margin-top:14px; font-size:16px;">高端对话，先锋座谈，圈层共鸣——头部对话方显「头号」地位</p>
+        <div class="mini-tags" style="justify-content:center;">
+          <span class="mini-tag">高端对话</span>
+          <span class="mini-tag">圈层共鸣</span>
+        </div>
+      </div>
+      <div class="card reveal reveal-delay-2 active" style="border-top:4px solid var(--red); text-align:center; padding:28px;">
+        <div class="card-icon">🎮</div>
+        <h3 style="font-size:20px; color:var(--red);">AI汽车操盘手</h3>
+        <p class="p-short" style="margin-top:14px; font-size:16px;">分享感受，展示过程，传递悦己。不一定是顶级极客，但一定是高级玩家</p>
+        <div class="mini-tags" style="justify-content:center;">
+          <span class="mini-tag">首席产品经理</span>
+          <span class="mini-tag">高级玩家</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 副标签矩阵表格 -->
+    <div class="reveal active">
+      <h3 class="block-title" style="font-size:18px; margin-bottom:16px;">副标签矩阵（按场景调用）</h3>
+      <div class="table-wrap">
+        <table class="table-style table-compact">
+          <tbody><tr>
+            <th style="width:22%">副标签</th>
+            <th style="width:42%">支撑事实</th>
+            <th style="width:36%">调用场景</th>
+          </tr>
+          <tr>
+            <td><strong>AI汽车人</strong></td>
+            <td>AI 原生车企产品一号位 + Vibe Coding资深玩家</td>
+            <td><span class="td-tag">AI极客圈</span><span class="td-tag">汽车圈</span></td>
+          </tr>
+          <tr>
+            <td><strong>车圈AI玩家</strong></td>
+            <td>AI 原生车企产品一号位 + Vibe Coding资深玩家</td>
+            <td><span class="td-tag">AI极客圈</span><span class="td-tag">汽车圈</span></td>
+          </tr>
+          <tr>
+            <td><strong>玩家头子</strong></td>
+            <td>组织活动、领头参与，带着用户玩儿AI</td>
+            <td><span class="td-tag">用户养成</span></td>
+          </tr>
+          <tr>
+            <td><strong>会写代码的车厂总裁</strong></td>
+            <td>研究Vibe Coding · 有AI Coding作品</td>
+            <td><span class="td-tag">AI极客圈</span><span class="td-tag">技术话题</span></td>
+          </tr>
+          <tr>
+            <td><strong>养了10只Claw的AI玩家</strong></td>
+            <td>个人AI养成爱好</td>
+            <td><span class="td-tag">活人感</span><span class="td-tag">破圈话题</span></td>
+          </tr>
+          <tr>
+            <td><strong>用户思维至上的「倾听者」</strong></td>
+            <td>典型PM · 喜欢倾听 · open不张扬</td>
+            <td><span class="td-tag">用户评论解构</span><span class="td-tag">共情内容</span></td>
+          </tr>
+          <tr>
+            <td><strong>三个AI产品的造物主</strong></td>
+            <td>AI汽车 + AI组织 + AI用户养成体系</td>
+            <td><span class="td-tag">品牌方法论</span><span class="td-tag">行业观点</span></td>
+          </tr>
+          <tr>
+            <td><strong>real的悦己实践者</strong></td>
+            <td>追求真实真诚 · 接地气 · 情感充沛</td>
+            <td><span class="td-tag">生活方式</span><span class="td-tag">悦己场景</span></td>
+          </tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== 07 使命 ===== -->
+<section class="section" id="mission">
+  <div class="container">
+    <div class="section-num reveal active">07 ｜ 高管IP使命</div>
+    <h2 class="section-title reveal reveal-delay-1 active">养信任 · 养AI · 养用户</h2>
+    <p class="lead reveal reveal-delay-2 active">基于养成系产品的主基调，新品牌需要信任养成，AI产品和组织需要迭代养成，新形态下的用户需要共创养成。</p>
+    
+    <div class="card-grid-3">
+      <div class="card reveal active" style="border:2px solid var(--red); background:var(--red-light); text-align:center;">
+        <div class="card-icon" style="font-size:48px;">🤝</div>
+        <h3>养信任</h3>
+        <p class="p-short">让行业和用户先相信「这个人靠谱」，再把信任迁移到AIVA品牌上。</p>
+      </div>
+      <div class="card reveal reveal-delay-1 active" style="border:2px solid var(--red); background:var(--red-light); text-align:center;">
+        <div class="card-icon" style="font-size:48px;">🤖</div>
+        <h3>养AI</h3>
+        <p class="p-short">用养成系叙事把AI技术讲成可感知的成长过程，把用户留住。</p>
+      </div>
+      <div class="card reveal reveal-delay-2 active" style="border:2px solid var(--red); background:var(--red-light); text-align:center;">
+        <div class="card-icon" style="font-size:48px;">👥</div>
+        <h3>养用户</h3>
+        <p class="p-short">新形态下的用户需要共创养成，让车未到，认知和人心已到。</p>
+      </div>
+    </div>
+    
+    <div class="quote-block reveal active" style="margin-top:40px;">
+      以「AI汽车头号玩家」的姿态，传递「AI悦己生活」；用养成系叙事，让车未到，认知和人心已到。
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== 08 叙事主线 ===== -->
+<section class="section bg-light" id="narrative">
+  <div class="container">
+    <div class="section-num reveal active">08 ｜ 三大叙事主线 + 副线</div>
+    <h2 class="section-title reveal reveal-delay-1 active">让IP说话的内容支柱</h2>
+    <p class="lead reveal reveal-delay-2 active">主线打专业，副线立人格；先锋对话树高度，用户养成建连接。</p>
+    
+    <div class="card-grid">
+      <div class="card reveal active" style="border-left:4px solid var(--red);">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px; text-align: center;">
+          <span class="tag" style="background: var(--red); color: var(--white); font-size: 24.7726px;">1</span>
+          <h3 style="margin:0; font-size:18px;">主线一：亲历者的「先锋对话」</h3>
+        </div>
+        <p class="p-short">邀请行业领袖、跨界先锋深度对谈。围绕AI汽车底层逻辑、技术拐点与未来图景，输出鲜明观点。借势顶级智慧为品牌背书，塑造产业升级「亲历者」形象。</p>
+        <div class="mini-tags">
+          <span class="mini-tag">高端对话</span>
+          <span class="mini-tag">技术拐点</span>
+          <span class="mini-tag">品牌背书</span>
+        </div>
+      </div>
+      <div class="card reveal reveal-delay-1 active" style="border-left:4px solid var(--red);">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+          <span class="tag" style="background: var(--red); color: var(--white); font-size: 24.7923px;">2</span>
+          <h3 style="margin:0; font-size:18px;">主线二：操盘手的「AI嘉年华」</h3>
+        </div>
+        <p class="p-short">工作时晒造车决策、制造过程、AI团队和组织变革；生活中用Vibe Coding、亲子互动等烟火气片段，趣味拆解AI的「隐藏技能」。不讲参数，在温情中完成认知普及。</p>
+        <div class="mini-tags">
+          <span class="mini-tag">造车过程</span>
+          <span class="mini-tag">Vibe Coding</span>
+          <span class="mini-tag">AI生活</span>
+        </div>
+      </div>
+      <div class="card reveal reveal-delay-2 active" style="border-left:4px solid var(--red);">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px; font-size: 18px;">
+          <span class="tag" style="background: var(--red); color: var(--white); font-size: 23px;">3</span>
+          <h3 style="margin:0; font-size:18px;">主线三：推动者的「用户养成计划」</h3>
+        </div>
+        <p class="p-short">联合天使用户及内部标杆员工，第一视角玩转产品功能。强化「AI不是参数，而是陪伴」的情感连接。通过线上线下活动，发现、吸引、筛选、养成潜在用户。</p>
+        <div class="mini-tags">
+          <span class="mini-tag">天使用户</span>
+          <span class="mini-tag">产品共创</span>
+          <span class="mini-tag">情感连接</span>
+        </div>
+      </div>
+      <div class="card card-light reveal reveal-delay-3 active" style="border-left: 4px solid rgb(255, 159, 67); color: rgb(235, 125, 36);">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+          <span class="tag" style="background: rgb(255, 159, 67); color: var(--white); font-size: 22.7641px;">4</span>
+          <h3 style="margin:0; font-size:18px;">副线：悦己者的「日常切片」</h3>
+        </div>
+        <p class="p-short">精力充沛的AI玩家和车厂高管：凌晨写代码、周末探店、陪家人用AI画画。对UI对齐有执着追求，养龙虾失败也会沮丧。不掩饰疲惫，不假装完美。真实而有温度。</p>
+        <div class="mini-tags">
+          <span class="mini-tag">烟火气</span>
+          <span class="mini-tag">不完美</span>
+          <span class="mini-tag">悦己生活</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== 09 平台策略 ===== -->
+<section class="section" id="platform">
+  <div class="container">
+    <div class="section-num reveal active">09 ｜ 平台策略</div>
+    <h2 class="section-title reveal reveal-delay-1 active">微博筑基 → 抖音破圈 → 矩阵扩散</h2>
+    <p class="lead reveal reveal-delay-2 active">微博是「立人设、建信任」的基本盘，抖音是「扩圈层、放大影响力」的放大器。</p>
+    
+    <!-- 平台选择表格 -->
+    <div class="table-wrap reveal active" style="margin-bottom:40px;">
+      <table class="table-style">
+        <tbody><tr>
+          <th style="width:18%">对比维度</th>
+          <th style="width:41%">微博（前期主阵地）</th>
+          <th style="width:41%">抖音（中期主阵地）</th>
+        </tr>
+        <tr>
+          <td><strong>起号逻辑</strong></td>
+          <td>圈层扩散型，新号友好</td>
+          <td>算法驱动型，素人冷启动极难</td>
+        </tr>
+        <tr>
+          <td><strong>人设匹配</strong></td>
+          <td>图文+轻视频，承载「拆决策、抖观点」</td>
+          <td>强表演属性，「思考型」内容易变形</td>
+        </tr>
+        <tr>
+          <td><strong>时间成本</strong></td>
+          <td>每日50分钟可覆盖日更+互动</td>
+          <td>每周需4-5小时，新手期性价比低</td>
+        </tr>
+        <tr>
+          <td><strong>3个月预期</strong></td>
+          <td>粉丝3-5万，媒体引用≥10次/月</td>
+          <td>粉丝过万难</td>
+        </tr>
+      </tbody></table>
+    </div>
+    
+    <!-- 三阶段 -->
+    <h3 class="block-title reveal active">二、三阶段执行节奏</h3>
+    <div class="equal-4" style="margin-top:28px;">
+      <div class="phase-card active reveal" style="padding:28px;">
+        <div class="phase-tag">阶段一 · 主力</div>
+        <h3 style="margin-top:14px; font-size:18px;">微博深耕期</h3>
+        <div class="tag" style="margin:12px 0; font-size:13px;">7月-9月</div>
+        <ul class="ul-clean" style="font-size:15px;">
+          <li>主阵地：微博独家运营</li>
+          <li>核心动作：日更 + 即时性内容 + 圈层高频互动</li>
+          <li>每周主线内容（先锋对话/AI嘉年华）</li>
+          <li>每周即时性轻内容（行业短评、AI生活碎片等）</li>
+          <li>每日转发评论行业KOL内容，渗透车圈/AI圈</li>
+          <li>李博投入：每日约1小时（含互动），每周额外30分钟审核主线</li>
+        </ul>
+        <div style="margin-top:16px; padding:14px; background:var(--red-light); border-radius:8px; font-size:15px; font-weight:700; color:var(--red);">
+          目标：建立「AI汽车头号玩家」人设，粉丝3-5万，媒体引用≥10次/月
+        </div>
+      </div>
+      <div class="phase-card reveal reveal-delay-1 active" style="padding:28px;">
+        <div class="phase-tag">阶段二</div>
+        <h3 style="margin-top:14px; font-size:18px;">抖音进场期</h3>
+        <div class="tag" style="margin:12px 0; font-size:13px;">10月-12月</div>
+        <ul class="ul-clean" style="font-size:15px;">
+          <li>主阵地：微博保持日更 + 抖音正式开通</li>
+          <li>核心动作：将微博已验证的主线和副线内容视频化复刻，轻量进场</li>
+        </ul>
+        <div style="margin-top:16px; padding:14px; background:var(--red-light); border-radius:8px; font-size:15px; font-weight:700; color:var(--red);">
+          目标：双平台粉丝突破10万+，抖音单条播放破万
+        </div>
+      </div>
+      <div class="phase-card reveal reveal-delay-2 active" style="padding:28px;">
+        <div class="phase-tag">阶段三</div>
+        <h3 style="margin-top:14px; font-size:18px;">矩阵扩散期</h3>
+        <div class="tag" style="margin:12px 0; font-size:13px;">2027 Q1起</div>
+        <ul class="ul-clean" style="font-size:15px;">
+          <li>主阵地：微博+抖音稳定运营 + 拓展B站/小红书</li>
+          <li>核心动作：孵化若干天使用户KOC账号和内部员工KOE账号，形成「李博主IP+用户共创账号」矩阵</li>
+        </ul>
+        <div style="margin-top:16px; padding:14px; background:var(--red-light); border-radius:8px; font-size:15px; font-weight:700; color:var(--red);">
+          目标：矩阵总粉丝30万+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== 10 内容策略 ===== -->
+<section class="section bg-red-light" id="content">
+  <div class="container">
+    <div class="section-num reveal active">10 ｜ 内容策略</div>
+    <h2 class="section-title reveal reveal-delay-1 active">主线筑专业，副线立人格</h2>
+    <p class="lead reveal reveal-delay-2 active">副线占比最高（日更+即时性），维持活跃度和圈层互动；主线占比低但负责建立专业信任和行业影响力。</p>
+    
+    <!-- 内容体系总览表格 -->
+    <div class="table-wrap reveal active">
+      <table class="table-style">
+        <tbody><tr>
+          <th style="width:14%">内容线</th>
+          <th style="width:28%">定位</th>
+          <th style="width:22%">核心形式</th>
+          <th style="width:18%">内容占比</th>
+          <th style="width:18%">与官号互动</th>
+        </tr>
+        <tr>
+          <td><strong>主线一：先锋对话</strong></td>
+          <td>行业观点输出，建立「车圈最懂AI」心智</td>
+          <td>图文长微博 / 对谈视频精华切片</td>
+          <td>15%：深度观点，重质不重量</td>
+          <td>官号可摘录金句做品牌叙事二次传播</td>
+        </tr>
+        <tr>
+          <td><strong>主线二：AI嘉年华</strong></td>
+          <td>工作时晒造车决策，生活晒AI玩法，传递「AI悦己」态度</td>
+          <td>图文拆解 + 轻量短视频（手机实拍）</td>
+          <td>30%：核心内容，兼顾工作与生活</td>
+          <td>官号转发「造车」内容并补充用户视角</td>
+        </tr>
+        <tr>
+          <td><strong>主线三：用户养成计划</strong></td>
+          <td>联合天使用户共创，强化「养成系」连接</td>
+          <td>图文互动 + 活动预告/回顾</td>
+          <td>15%：互动驱动，逐步加大</td>
+          <td>官号同步发起活动，李博带头参与，双号联动</td>
+        </tr>
+        <tr>
+          <td><strong>副线：日常切片</strong></td>
+          <td>活人感内容，展示小爱好、真实情绪、日常思考</td>
+          <td>即时性短文 / 随手拍视频（1分钟内）</td>
+          <td>40%：日更主力，撑起活人感和存在感</td>
+          <td>-</td>
+        </tr>
+      </tbody></table>
+    </div>
+    
+    <!-- 栏目体系 -->
+    <h3 class="block-title reveal active" style="margin-top:36px;">固定栏目体系</h3>
+    <div class="table-wrap reveal reveal-delay-1 active">
+      <table class="table-style">
+        <tbody><tr>
+          <th style="width:14%">栏目名称</th>
+          <th style="width:12%">所属内容线</th>
+          <th style="width:22%">形式</th>
+          <th style="width:10%">频次</th>
+          <th style="width:26%">说明</th>
+          <th style="width:16%">官号联动</th>
+        </tr>
+        <tr>
+          <td><strong>《头号对谈》</strong></td>
+          <td>主线一</td>
+          <td>图文长微博 / 对谈视频精华切片</td>
+          <td>每两周1次</td>
+          <td>与官号访谈形成互补和差异，官号嘉宾深访+多元嘉宾对谈</td>
+          <td>官号摘录金句做品牌叙事</td>
+        </tr>
+        <tr>
+          <td><strong>《造车手记》</strong></td>
+          <td>主线二</td>
+          <td>图文拆解 + 轻量短视频（手机实拍）</td>
+          <td>每周1次</td>
+          <td>记录产品决策过程、技术取舍</td>
+          <td>官号转发并补充用户视角</td>
+        </tr>
+        <tr>
+          <td><strong>《AI整活儿》</strong></td>
+          <td>主线二</td>
+          <td>轻量短视频</td>
+          <td>每周1次</td>
+          <td>Vibe Coding、AI亲子等生活化AI玩法</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td><strong>《AI听劝》</strong></td>
+          <td>主线三</td>
+          <td>图文互动</td>
+          <td>每周1次</td>
+          <td>发起用户脑洞征集，回应用户建议</td>
+          <td>官号同步发起活动，双号联动</td>
+        </tr>
+        <tr>
+          <td><strong>《博唠嗑》</strong></td>
+          <td>副线</td>
+          <td>即时短文/随手拍</td>
+          <td>每周3-4次</td>
+          <td>养虾失败、真实情绪、日常爱好、AI哲学或深度思考等</td>
+          <td>-</td>
+        </tr>
+      </tbody></table>
+    </div>
+    
+    <!-- 阶段二、三精简 -->
+    <div class="two-col" style="margin-top:32px;">
+      <div class="reveal active">
+        <h4 class="sub-title">阶段二：抖音进场期（10-12月）</h4>
+        <ul class="ul-clean">
+          <li>《造车手记》《AI整活儿》《博唠嗑》视频化复刻</li>
+          <li>新增《头号对谈》视频精华版（30-60秒）</li>
+          <li>手机实拍口播或第一视角跟拍</li>
+          <li>每周1-2条原生短视频，微博日更保持不变</li>
+        </ul>
+      </div>
+      <div class="reveal reveal-delay-1 active">
+        <h4 class="sub-title">阶段三：矩阵扩散期（2027 Q1）</h4>
+        <ul class="ul-clean">
+          <li>B站：《造车手记》扩展为中长视频（5-10分钟）</li>
+          <li>小红书：《AI整活儿》《博唠嗑》图文/短视频</li>
+          <li>孵化天使用户KOC + 内部员工KOE</li>
+          <li>主攻《AI听劝》用户共创内容</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== 11 选题规划 ===== -->
+<section class="section" id="topic">
+  <div class="container">
+    <div class="section-num reveal active">11 ｜ 选题规划</div>
+    <h2 class="section-title reveal reveal-delay-1 active">主线定节奏，副线保日常</h2>
+    <p class="lead reveal reveal-delay-2 active">以央视专访为引爆点，覆盖「开号定调→深度观点→互动征集→生活切片」全链路</p>
+    
+    <!-- 首周内容规划表格 -->
+    <div class="table-wrap reveal active">
+      <table class="table-style">
+        <tbody><tr>
+          <th style="width:8%">序号</th>
+          <th style="width:18%">栏目</th>
+          <th style="width:28%">选题</th>
+          <th style="width:22%">核心内容</th>
+          <th style="width:24%">核心创意（微博爆款机制）</th>
+        </tr>
+        <tr>
+          <td><strong>1.</strong></td>
+          <td>博唠嗑</td>
+          <td>开号自我介绍、央视专访个人预告、专访花絮、行业热点短评</td>
+          <td>「我是李博，AIVA头号玩家。不介意可以叫我博哥」</td>
+          <td>「不端不装」反差人设，引发好感；央视背书+悬念预告，易被媒体转载</td>
+        </tr>
+        <tr>
+          <td><strong>2.</strong></td>
+          <td>头号对谈</td>
+          <td>央视专访精华</td>
+          <td>「央视专访播出，聊了聊AI汽车到底是不是噱头。这是精华版，完整版可以去央视看。」</td>
+          <td>央视权威背书，大幅提升账号可信度；专访精华可拆多条切片，延长传播周期</td>
+        </tr>
+        <tr>
+          <td><strong>3.</strong></td>
+          <td>造车手记</td>
+          <td>为什么坚持AI定义汽车、砍掉一个「酷功能」</td>
+          <td>「AI不是附加题，是必答题」「团队争论三周，最后砍了——用户要省心不是炫技」</td>
+          <td>行业观点+个人经历，媒体引用素材；「砍功能」比「做功能」更有话题性</td>
+        </tr>
+        <tr>
+          <td><strong>4.</strong></td>
+          <td>AI整活儿</td>
+          <td>Vibe Coding首秀、AI亲子趣事</td>
+          <td>「灯随音乐变色，失败三次，第四次亮了」「孩子用AI画画，猫画成狗，他说AI需要补习」</td>
+          <td>代码研究+生活化，反差萌易破圈；亲子+AI趣事，家庭场景引发转发</td>
+        </tr>
+        <tr>
+          <td><strong>5.</strong></td>
+          <td>AI听劝</td>
+          <td>开号征集：MBTI的颜色选择？首周互动汇总</td>
+          <td>「MBTI都喜欢什么颜色」「收到很多留言，下周一个个试」</td>
+          <td>降低参与门槛，刺激UGC；「听劝」人设强化信任，形成系列连载</td>
+        </tr>
+      </tbody></table>
+    </div>
+    
+    <!-- 日常内容对称表现 -->
+    <div class="reveal active" style="margin-top:36px;">
+      <h4 class="sub-title">日常互动内容</h4>
+      <div class="equal-4">
+        <div class="card" style="text-align:center; padding:24px;">
+          <div class="card-icon" style="font-size:28px; margin-bottom:10px;">💬</div>
+          <h4 style="font-size:16px; margin-bottom:8px;">行业短评</h4>
+          <p class="p-short" style="font-size:15px;">热点事件、竞品动态、技术突破的短评，体现专业度和活人感</p>
+        </div>
+        <div class="card" style="text-align:center; padding:24px;">
+          <div class="card-icon" style="font-size:28px; margin-bottom:10px;">🎬</div>
+          <h4 style="font-size:16px; margin-bottom:8px;">AI生活碎片</h4>
+          <p class="p-short" style="font-size:15px;">Vibe Coding过程、亲子AI互动、周末探店，传递悦己生活</p>
+        </div>
+        <div class="card" style="text-align:center; padding:24px;">
+          <div class="card-icon" style="font-size:28px; margin-bottom:10px;">🔁</div>
+          <h4 style="font-size:16px; margin-bottom:8px;">KOL互动</h4>
+          <p class="p-short" style="font-size:15px;">转发评论车圈/AI圈KOL内容，渗透圈层，建立行业存在感</p>
+        </div>
+        <div class="card" style="text-align:center; padding:24px;">
+          <div class="card-icon" style="font-size:28px; margin-bottom:10px;">📊</div>
+          <h4 style="font-size:16px; margin-bottom:8px;">用户反馈</h4>
+          <p class="p-short" style="font-size:15px;">回复评论、采纳建议、展示改进，强化「听劝」人设</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== 12 运营策略 ===== -->
+<section class="section" id="operation">
+  <div class="container">
+    <div class="section-num reveal active">12 ｜ 运营策略</div>
+    <h2 class="section-title reveal reveal-delay-1 active">AI驱动，人机协同</h2>
+    <p class="lead reveal reveal-delay-2 active">团队轻量化运转，AI全链路提效，让李博的IP运营做到「AI玩家用AI运营」</p>
+    
+    <div class="quote-block reveal" style="margin-bottom:36px;">
+      打造可自主进化的社交账号。
+    </div>
+    
+    <div class="two-col" style="margin-bottom:36px;">
+      <!-- 形象妆照 -->
+      <div class="reveal">
+        <h3 class="block-title">一、形象妆照：记忆点 + 赛豆红</h3>
+        <div class="table-wrap">
+          <table class="table-style">
+            <tbody><tr>
+              <th style="width:18%">维度</th>
+              <th style="width:22%">要点</th>
+              <th style="width:60%">具体描述</th>
+            </tr>
+            <tr>
+              <td><strong>主色调</strong></td>
+              <td>赛豆红</td>
+              <td>服饰、背景、道具中高频出现品牌红色元素，形成视觉锤</td>
+            </tr>
+            <tr>
+              <td><strong>夏季穿搭</strong></td>
+              <td>smart casual</td>
+              <td>夏天穿搭品牌Polo衫或T恤，外搭硅基白·科技黑的西服外套，搭配休闲裤/牛仔裤，兼顾品牌色与舒适感</td>
+            </tr>
+            <tr>
+              <td><strong>记忆点口号</strong></td>
+              <td>「哎哟不错」</td>
+              <td>利用「AI」谐音「哎/爱」，在视频开头或结尾固定使用，如「哎哟不错哦，这个AI有点东西」形成个人语言符号</td>
+            </tr>
+            <tr>
+              <td><strong>标志性手势</strong></td>
+              <td>比「OK」手势</td>
+              <td>每期视频结尾或图文签名处，做一个「OK」手势（代表AI、OK、搞定），强化人格符号</td>
+            </tr>
+            <tr>
+              <td><strong>拍摄场景</strong></td>
+              <td>工位/车间/家中</td>
+              <td>不刻意搭棚，真实环境+赛豆红点缀，降低制作成本</td>
+            </tr>
+          </tbody></table>
+        </div>
+      </div>
+      
+      <!-- 运营机制 -->
+      <div class="reveal reveal-delay-1">
+        <h3 class="block-title">二、运营机制：基于AI的账号运营流程</h3>
+        <div class="table-wrap">
+          <table class="table-style">
+            <tbody><tr>
+              <th style="width:16%">流程</th>
+              <th style="width:58%">说明</th>
+              <th style="width:26%">频次</th>
+            </tr>
+            <tr>
+              <td><strong>热点选题</strong></td>
+              <td>1. AI自动抓取当日相关热搜，生成选题建议推送团队；2. 李博下发感兴趣的选题，团队策划落地</td>
+              <td>每日</td>
+            </tr>
+            <tr>
+              <td><strong>内容生产</strong></td>
+              <td>AI结合选题生产文案/图片类初稿，人工调优确认</td>
+              <td>每日</td>
+            </tr>
+            <tr>
+              <td><strong>内容审核</strong></td>
+              <td>运营方提报→甲方小组初审→李博终审→图文发布</td>
+              <td>每篇内容</td>
+            </tr>
+            <tr>
+              <td><strong>投流加热</strong></td>
+              <td>自然流量观察（4-6小时） → 筛选可投流内容→实时监控ROI→动态调整出价</td>
+              <td>先周度尝试</td>
+            </tr>
+            <tr>
+              <td><strong>舆情监控</strong></td>
+              <td>AI实时监测全网关键词，分级预警</td>
+              <td>每日</td>
+            </tr>
+            <tr>
+              <td><strong>数据复盘</strong></td>
+              <td>人工抓取结合AI生成周报/月报，标注异常波动等</td>
+              <td>每周/每月</td>
+            </tr>
+            <tr>
+              <td><strong>评论区管理</strong></td>
+              <td>李博每日回复前10条高质量评论；运营筛选优质UGC转发</td>
+              <td>每日</td>
+            </tr>
+          </tbody></table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== 总结 ===== -->
+<section class="section bg-light" id="final">
+  <div class="container" style="text-align:center;">
+    <div class="section-num reveal">SUMMARY</div>
+    <h2 class="section-title reveal reveal-delay-1">策略总览</h2>
+    <p class="lead reveal reveal-delay-2" style="margin:0 auto 40px;">从核心思想到内容落地，一条逻辑贯穿到底</p>
+    
+    <div class="summary-flow reveal">
+      <div class="summary-node">趋势判断<br><span style="font-size:14px; color:var(--gray);">高管IP = 竞争标配</span></div>
+      <div class="summary-arrow">→</div>
+      <div class="summary-node">人选确定<br><span style="font-size:14px; color:var(--gray);">李博 = 最优解</span></div>
+      <div class="summary-arrow">→</div>
+      <div class="summary-node">人设定位<br><span style="font-size:14px; color:var(--gray);">AI汽车头号玩家</span></div>
+      <div class="summary-arrow">→</div>
+      <div class="summary-node">平台策略<br><span style="font-size:14px; color:var(--gray);">微博→抖音→矩阵</span></div>
+      <div class="summary-arrow">→</div>
+      <div class="summary-node">内容落地<br><span style="font-size:14px; color:var(--gray);">3主线 + 1副线</span></div>
+    </div>
+    
+    <div class="quote-block reveal" style="max-width:760px; margin:40px auto 0; text-align:left;">
+      <strong>一句话总结：</strong>以「AI汽车头号玩家」人设，通过「养信任、养AI、养用户」三大使命，用「先锋对话 + AI嘉年华 + 用户养成 + 日常切片」四条内容支柱，在微博筑基、抖音破圈、矩阵扩散的三阶段节奏中，打造可自主进化的高管IP账号。
+    </div>
+    
+    <div style="margin-top:56px; color:var(--gray); font-size:15px;" class="reveal">
+      <p>AIVA · 赛豆品牌市场部</p>
+      <p>2026年6月24日 · 内部机密</p>
+    </div>
+  </div>
+</section>
+
+<script>
+// ===== 滚动揭示动画 =====
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('active');
+      const counters = entry.target.querySelectorAll('.count-up');
+      counters.forEach(counter => {
+        if (!counter.classList.contains('counted')) {
+          counter.classList.add('counted');
+          animateCounter(counter);
+        }
+      });
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+function animateCounter(el) {
+  const target = parseInt(el.getAttribute('data-target'));
+  const duration = 1500;
+  const start = performance.now();
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+    el.textContent = Math.floor(eased * target);
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+// ===== 导航高亮 =====
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.getAttribute('id');
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+}, { threshold: 0.25, rootMargin: '-56px 0px 0px 0px' });
+
+sections.forEach(section => navObserver.observe(section));
+
+// ===== 平滑滚动 =====
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      const top = target.getBoundingClientRect().top + window.pageYOffset - 56;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }
+  });
+});
+
+// ===== 导航滚动隐藏/显示 =====
+let lastScrollY = window.scrollY;
+const topNav = document.getElementById('topNav');
+window.addEventListener('scroll', () => {
+  const currentScrollY = window.scrollY;
+  if (currentScrollY > lastScrollY && currentScrollY > 200) {
+    topNav.style.transform = 'translateY(-100%)';
+  } else {
+    topNav.style.transform = 'translateY(0)';
+  }
+  lastScrollY = currentScrollY;
+}, { passive: true });
+</script>
+
+
+</body></html>
